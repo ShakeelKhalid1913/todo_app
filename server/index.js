@@ -20,7 +20,7 @@ app.use('/todos', todosRoutes);
 
 mongoose.connect(process.env.DB)
     .then(() =>
-        console.log("Server is running on PORT", PORT)
+        app.listen(PORT, () => console.log("Server is running on PORT", PORT))
     ).catch(error =>
         console.log(error)
     , {useNewUrlParser: true})
@@ -28,4 +28,3 @@ mongoose.connect(process.env.DB)
 mongoose.connection.once('open', () => {
    console.log("MongoDB database connection established successfully")
 });
-app.listen(PORT);
