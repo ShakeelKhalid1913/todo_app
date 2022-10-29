@@ -16,15 +16,16 @@ app.use(cors());
 app.use(bodyParser.json())
 app.use('/todos', todosRoutes);
 
-//const DB = "mongodb+srv://shakeel:shakeel1913@cluster0.o1kyzlh.mongodb.net/todos-database?retryWrites=true&w=majority";
-
 mongoose.connect(process.env.DB)
     .then(() =>
         app.listen(PORT, () => console.log("Server is running on PORT", PORT))
-    ).catch(error =>
-        console.log(error)
+    ).catch(error =>console.log(error)
     , {useNewUrlParser: true})
 
 mongoose.connection.once('open', () => {
    console.log("MongoDB database connection established successfully")
 });
+
+app.get('/', (req, res) => {
+   res.send("Hello World");
+})

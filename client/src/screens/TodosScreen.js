@@ -3,13 +3,14 @@ import TodoItem from "../components/TodoItem";
 import {Container, Table} from "react-bootstrap";
 import axios from "axios";
 import {Audio, ThreeDots} from "react-loader-spinner";
+import {deleteTodo, readTodos} from "../api";
 
 function TodosScreen(props) {
    const [todos, setTodos] = useState([]);
    const [loading, setLoading] = useState(true);
 
    const onDelete = (_id) => {
-      axios.delete(`http://localhost:5000/todos/delete/${_id}`)
+      deleteTodo(_id)
           .then(res => {
              setTodos(todos.filter(todo => todo._id !== _id))
           })
@@ -18,7 +19,7 @@ function TodosScreen(props) {
 
    //work as life cycle componentDidMount, everytime any change occur this will run
    useEffect(() => {
-      axios.get('http://localhost:5000/todos/')
+      readTodos()
           .then(res => {
              setTodos(res.data)
              setLoading(false)

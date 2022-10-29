@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import {Alert, Button, Col, Form, Row} from "react-bootstrap";
 import {useLocation} from "react-router-dom";
 import axios from "axios";
+import {createTodo, updateTodo} from "../api";
 
 function AddTodoScreen(props) {
    //getting values from component
@@ -25,7 +26,7 @@ function AddTodoScreen(props) {
                description: description
             }
 
-            axios.post('http://localhost:5000/todos/add', newTodo)
+            createTodo(newTodo)
                 .then(res => {
                    setAlert(true)
                    setAlertText("Todo added in the list");
@@ -43,7 +44,7 @@ function AddTodoScreen(props) {
                title: title,
                description: description
             }
-            axios.put(`http://localhost:5000/todos/update/${newTodo._id}`, newTodo)
+            updateTodo(newTodo)
                 .then(res => {
                    setAlert(true)
                    setAlertText("Todo updated");
